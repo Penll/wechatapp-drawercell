@@ -12,12 +12,15 @@
 
 
 ## 展示效果
+
+实际应用图：
 ![image](https://github.com/Penll/preview-img/blob/master/drawer-cell/temp.gif)
 
-
+此范例效果1
 ![image](https://github.com/Penll/preview-img/blob/master/drawer-cell/1.jpg)
 
 
+此范例效果2
 ![image](https://github.com/Penll/preview-img/blob/master/drawer-cell/2.jpg)
 
 
