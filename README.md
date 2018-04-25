@@ -14,6 +14,9 @@
 
 
 ## 如何使用此组件？
-  1.请自定义 外层css样式，如 class="pic-listcell-view"
-  2.每一项cell 用模版个性化替换 template is="cell-item-operates"
+1. 请自定义 外层css样式，如 class="pic-listcell-view"
+2. 每一项cell 用模版个性化替换 template is="cell-item-operates"
 
+## 联系方式
+
+penll@qq.com
