@@ -4,7 +4,7 @@
 
 
 ## 展示效果
-![image](https://github.com/Penll/preview-img/blob/master/drawer-cell/temp.jpg)
+![image](https://github.com/Penll/preview-img/blob/master/drawer-cell/temp.gif)
 
 
 ![image](https://github.com/Penll/preview-img/blob/master/drawer-cell/1.jpg)
