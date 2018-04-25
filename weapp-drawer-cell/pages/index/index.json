@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "消息中心",
+  "usingComponents": {
+    "list-cell": "../component/list-cell/list-cell"
+  }
+}

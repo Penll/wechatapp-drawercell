@@ -1,0 +1,4 @@
+<!--index.wxml-->
+<view class="page">
+  <list-cell bind:onCellTap="bindCellTapHandler" bind:onOperateTap="bindOperateTapHandler" dataList="{{messageList}}"></list-cell>
+</view>
