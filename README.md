@@ -3,6 +3,14 @@
 此项目 基于微信小程序开发，独立打开可直接使用，可能后期，根据工作时间不定期持续优化
 
 
+## 实际应用例子
+
+```
+请搜索小程序《宝宝时光Lite》
+```
+
+
+
 ## 展示效果
 ![image](https://github.com/Penll/preview-img/blob/master/drawer-cell/temp.gif)
 
