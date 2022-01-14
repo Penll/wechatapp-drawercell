@@ -14,6 +14,30 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function isEmpty(obj) {
+  if (
+    typeof obj == "undefined" ||
+    (!obj && typeof obj != "undefined" && obj != 0) ||
+    obj == null
+  ) {
+    return true;
+  }
+  for (let i in obj) {
+    return false;
+  }
+  if (typeof obj === "number") {
+    return false;
+  }
+  return true;
+}
+
+function isNotEmpty(obj) {
+  return !isEmpty(obj);
+}
+
+
 module.exports = {
+  isEmpty: isEmpty,
+  isNotEmpty: isNotEmpty,
   formatTime: formatTime
 }
