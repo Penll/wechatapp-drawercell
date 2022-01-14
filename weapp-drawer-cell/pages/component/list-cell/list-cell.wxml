@@ -1,78 +1,88 @@
-<view class="pic-listcell-view" hidden="{{hidden}}">
-  <view class="cell-item-view" wx:for="{{dataList}}" wx:key="key" data-value="{{item}}" data-index="{{index}}" bindtap="_bindCellTapHandler">
-    <view class="cell-item" data-index="{{index}}" bindtouchstart="_cellTouchStart" bindtouchmove="_cellTouchMove" bindtouchend="_cellTouchEnd" style="left:{{item.cellMoveLeftDistance?item.cellMoveLeftDistance:0}}px">
-      <!-- TODO：根据类型调用对应模版 -->
-      <template is="cell-item-message" data="{{item:item}}"></template>
+<view class="pic-listcell-view" hidden="{{hidden}}" bindtap="_bindReset">
+    <view class="cell-item-view" wx:for="{{dataList}}" wx:key="key" data-value="{{item}}" data-index="{{index}}"
+        catchtap="_bindCellTapHandler">
+
+        <view class="cell-item" data-index="{{index}}" bindtouchstart="_cellTouchStart" bindtouchmove="_cellTouchMove"
+            bindtouchend="_cellTouchEnd" animation='{{item.animation}}'>
+            <!-- 根据类型调用对应模版 -->
+            <template is="cell-item-message" data="{{item:item,isRadiusCorner:isRadiusCorner}}"></template>
+        </view>
+        <view class="cell-operate-items">
+            <template is="cell-item-operates"
+                data="{{itemIndex:index,operateItemWidth:operateItemWidth,hasCloseNotice:item.hasCloseNotice}}"></template>
+        </view>
     </view>
-    <view class="cell-operate-items">
-      <template is="cell-item-operates" data="{{itemIndex:index,operateItemWidth:operateItemWidth,hasCloseNotice:item.hasCloseNotice}}"></template>
-    </view>
-  </view>
 </view>
 
 <template name="cell-item-operates">
-  <view class="operate-item">
-  </view>
+    <view class="operate-item">
+    </view>
 
-  <view catchtap="_bindOperateTapHandler" class="operate-item blue}}" style="{{operateItemWidth?'width:'+operateItemWidth+'rpx':''}}" data-index="{{itemIndex}}" data-value='{{hasCloseNotice?"打开提醒":"关闭提醒"}}'>
-    <text>{{hasCloseNotice?"打开提醒":"关闭提醒"}}</text>
-  </view>
+    <view catchtap="_bindOperateTapHandler" class="operate-item {{hasCloseNotice?'blue':'red'}}"
+        style="{{operateItemWidth?'width:'+operateItemWidth+'rpx':''}}" data-index="{{itemIndex}}"
+        data-value='{{hasCloseNotice?"打开提醒":"关闭提醒"}}'>
+        <text>{{hasCloseNotice?"打开提醒":"关闭提醒"}}</text>
+    </view>
 
-  <view catchtap="_bindOperateTapHandler" class="operate-item gray" style="{{operateItemWidth?'width:'+operateItemWidth+'rpx':''}}" data-index="{{itemIndex}}" data-value="已读">
-    <text>已读</text>
-  </view>
+    <view catchtap="_bindOperateTapHandler" class="operate-item gray"
+        style="{{operateItemWidth?'width:'+operateItemWidth+'rpx':''}}" data-index="{{itemIndex}}" data-value="已读">
+        <text>已读</text>
+    </view>
 </template>
 
 <!-- 用于消息的 cell-item模版 -->
 <template name="cell-item-message">
-  <template is="cell-item-leftpic" data="{{picUrl:item.pic,isRadiusCorner:true}}"></template>
-  <template is="cell-item-middle" data="{{title:item.title,des:item.describeInfo}}"></template>
-  <template is="cell-item-right-message" data="{{date:item.formatUpdate,hasNewPoint:item.hasNewPoint,hasCloseNotice:item.hasCloseNotice}}"></template>
+    <template is="cell-item-leftpic" data="{{picUrl:item.pic,isRadiusCorner:isRadiusCorner}}"></template>
+    <template is="cell-item-middle" data="{{title:item.title,des:item.describeInfo}}"></template>
+    <template is="cell-item-right-message"
+        data="{{date:item.formatUpdate,hasNewPoint:item.hasNewPoint,hasCloseNotice:item.hasCloseNotice}}"></template>
 </template>
 
 <!-- 左边图 通用 图片是否方形判断 -->
 <template name="cell-item-leftpic">
-  <view class="left-pic-container">
-    <block wx:if="{{picUrl}}">
-      <image class="pic {{isRadiusCorner?'radius-corner':''}}" src='{{picUrl}}' mode="aspectFill"></image>
-    </block>
-    <block wx:else>
-      <image class="pic" src='../../../resources/images/img_user_default.png' mode="aspectFill"></image>
-    </block>
-  </view>
+    <view class="left-pic-container">
+        <block wx:if="{{picUrl}}">
+            <image class="pic {{isRadiusCorner?'radius-corner':''}}" src='{{picUrl}}' mode="aspectFill"></image>
+        </block>
+        <block wx:else>
+            <image class="pic {{isRadiusCorner?'radius-corner':''}}" src='/resources/images/img_default_avatar.svg'
+                mode="aspectFill"></image>
+        </block>
+    </view>
 </template>
 
 <!-- 中间 标题&描述   标题加粗 与否判断 -->
 <template name="cell-item-middle">
-  <view class="middle-des">
-    <view class="title {{isNormalTitle?'normal-title':''}}">
-      {{title}}
+    <view class="middle-des">
+        <view class="title normal-title">
+            {{title}}
+            <!-- <block wx:if="{{item.groupType!=1}}">
+                    <text class="normal">的动态</text>
+                </block> -->
+        </view>
+        <view class="middle-description">
+            <view class="description">{{des}}</view>
+        </view>
     </view>
-    <view class="middle-description">
-      <view class="description">{{des}}</view>
-    </view>
-  </view>
 </template>
 
 <!-- 右边 箭号 -->
 <template name="cell-item-right-arrow">
-  <view class="right-view">
-    <image class="right-arrow" src="../../../resources/images/img_arrow.png"></image>
-  </view>
+    <view class="right-view">
+        <image class="right-arrow" src="/resources/images/img_arrow.svg"></image>
+    </view>
 </template>
 
 <!-- 右边 消息提示 -->
 <template name="cell-item-right-message">
-  <view class="right-view-message">
-    <view class="date">{{date}}</view>
-    <!-- 关闭通知 -->
-    <view class="notice-view">
-      <view wx:if="{{hasCloseNotice}}" class="notice-item icon-item">
-        <image src="../../../resources/images/img_close_notify.png"></image>
-      </view>
-      <view wx:if="{{hasNewPoint}}" class="notice-item newPoint">
-        NEW
-      </view>
+    <view class="right-view-message">
+        <view class="date">{{date}}</view>
+        <!-- 关闭通知 -->
+        <view class="notice-view">
+            <view wx:if="{{hasCloseNotice}}" class="notice-item icon-item">
+                <image class="img" src="/resources/images/icon_close_notify.svg"></image>
+            </view>
+            <view wx:if="{{ hasNewPoint}}" class="notice-item newPoint"></view>
+        </view>
     </view>
-  </view>
 </template>
